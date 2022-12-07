@@ -1,6 +1,5 @@
 import numpy as np
 import pickle
-from keras.preprocessing.image import ImageDataGenerator
 import cv2
 
 img_size = 150
