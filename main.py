@@ -6,7 +6,7 @@ import streamlit.components.v1 as components
 from PIL import Image
 import os
 import cv2
-
+import matplotlib.pyplot as plt
 
 import seaborn as sns
 
