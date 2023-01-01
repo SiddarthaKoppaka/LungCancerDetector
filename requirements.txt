@@ -1,6 +1,6 @@
 opencv-python-headless
 sklearn
-tensorflow-load_model
+tensorflow
 streamlit
 matplotlib
 seaborn
