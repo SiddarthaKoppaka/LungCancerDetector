@@ -2,3 +2,5 @@ opencv-python
 sklearn
 tensorflow
 streamlit
+matplotlib
+seaborn
