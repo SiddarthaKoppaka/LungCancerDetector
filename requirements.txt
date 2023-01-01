@@ -1,4 +1,4 @@
-opencv-python
+opencv-headless
 sklearn
 tensorflow
 streamlit
