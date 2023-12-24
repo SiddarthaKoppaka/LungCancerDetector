@@ -2,7 +2,6 @@ from helper import *
 import streamlit as st
 from PIL import Image
 import numpy as np
-import cv2
 
 # Assuming 'predictor' is a function that takes a grayscale image array and returns the classification result
 # from predictor import predictor 
