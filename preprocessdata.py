@@ -7,8 +7,7 @@ img_size = 150
 
 def get_training_data(img):
     data = []
-    img_arr = cv2.imread(img, cv2.IMREAD_GRAYSCALE)
-    resized_arr = cv2.resize(img_arr,(img_size,img_size))
+    resized_arr = cv2.resize(img,(img_size,img_size))
     data.append([resized_arr])
     return np.array(data)
 

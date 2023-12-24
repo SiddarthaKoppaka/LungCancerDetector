@@ -1,66 +1,46 @@
 from helper import *
-
-#importing all the helper fxn from helper.py which we will create later
 import streamlit as st
-import streamlit.components.v1 as components
 from PIL import Image
-import os
+import numpy as np
 import cv2
-import matplotlib.pyplot as plt
 
-import seaborn as sns
+# Assuming 'predictor' is a function that takes a grayscale image array and returns the classification result
+# from predictor import predictor 
 
-sns.set_theme(style="darkgrid")
+# Page configuration
+st.set_page_config(page_title="Lung Cancer Classifier", layout="wide")
 
-sns.set()
-
+# Title and Introduction
 st.title('Lung Cancer Classifier')
+st.markdown("""
+    ### Detect Anomalies in Your Lungs
+    Utilize our advanced Deep Learning model based on Convolutional Neural Networks (CNN) to analyze X-ray images. 
+    The model, trained with a comprehensive dataset from Kaggle, boasts an impressive accuracy of around 90%. 
+    Please note: This tool is intended for educational purposes and should not be considered a substitute for professional medical advice.
+</s>""")
 
-def save_uploaded_file(uploaded_file):
+# Sidebar for user inputs
+st.sidebar.header("Upload X-ray Image")
+uploaded_file = st.sidebar.file_uploader("", type=["jpg", "jpeg", "png"])
 
-    try:
+# Main Content Area
+col1, col2 = st.columns([2, 3])  # Adjust the ratio of the columns
+with col1:
+    if uploaded_file is not None:
+        # Convert the file to an Image object and display
+        image = Image.open(uploaded_file).convert('L')  # Convert to grayscale
+        st.image(image, caption="Uploaded Image", use_column_width=True)
 
-        with open(os.path.join('static/images',uploaded_file.name),'wb') as f:
-
-            f.write(uploaded_file.getbuffer())
-
-        return 1    
-
-    except:
-
-        return 0
-
-
-components.html("""<html  style="font-family:'Poppins', sans-serif;">
-    <h1> Detect Anamolies in your Lungs using this Lung Cancer Detector </h1>
-    
-    <p style="color: grey;">This Deep Learning model is based on CNN. We used a dataset imported from Kaggle, and prepared
-    a CNN model with an accuracy around 90%. Later, using Streamlit the model is deployed to web.<br><br>
-    <small>This project is made for Educational purposes, not reliable for real world issues.</small>
-    </p>
-    </html>""" ,height= 400)
-
-
-
-uploaded_file = st.file_uploader("Upload Image")
-
-
-
-
-# text over upload button "Upload Image"
-
-if uploaded_file is not None:
-
-    if save_uploaded_file(uploaded_file): 
-
-        # display the image
-
-        display_image = Image.open(uploaded_file)
-
-        st.image(display_image)
-
-        result = predictor(os.path.join('static/images',uploaded_file.name)) 
+with col2:
+    if uploaded_file is not None:
+        # Convert the image to a numpy array and classify
+        image_np = np.array(image)
+        result = predictor(image_np)
         
-        os.remove('static/images/'+uploaded_file.name)
+        # Use markdown to ensure the text wraps correctly and doesn't get cut off
+        st.markdown(f"#### Classification Result")
+        st.markdown(f"##### Your chances of having PNEUMONIA is: **{result}**")
 
-        st.write(result)
+# Footer
+st.markdown("---")
+st.markdown("By Siddartha Koppaka.")
