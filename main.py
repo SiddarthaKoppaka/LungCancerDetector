@@ -15,8 +15,7 @@ st.markdown("""
     ### Detect Anomalies in Your Lungs
     Utilize our advanced Deep Learning model based on Convolutional Neural Networks (CNN) to analyze X-ray images. 
     The model, trained with a comprehensive dataset from Kaggle, boasts an impressive accuracy of around 90%. 
-    Please note: This tool is intended for educational purposes and should not be considered a substitute for professional medical advice.
-</s>""")
+    Please note: This tool is intended for educational purposes and should not be considered a substitute for professional medical advice.""")
 
 # Sidebar for user inputs
 st.sidebar.header("Upload X-ray Image")
